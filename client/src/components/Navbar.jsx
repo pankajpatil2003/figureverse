@@ -10,15 +10,19 @@ import {
   PackageSearch,
   LayoutDashboard,
   LogOut,
-  Flame
+  Flame,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../context/ThemeContext';
 import { apiFetch } from '../api/client';
 
 export default function Navbar() {
   const { user, isAdmin, logout } = useAuth();
   const { itemCount, setIsDrawerOpen } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
@@ -95,6 +99,16 @@ export default function Navbar() {
           </form>
 
           <div className="fv-header-actions">
+            <button
+              type="button"
+              className="fv-theme-toggle"
+              onClick={toggleTheme}
+              title={theme === 'light' ? 'Switch to Dark Theme' : 'Switch to White Theme'}
+            >
+              {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
+              <span>{theme === 'light' ? 'Dark' : 'White'}</span>
+            </button>
+
             {user ? (
               <div className="fv-user-menu">
                 <Link to={isAdmin ? '/admin' : '/account/orders'} className="fv-action-btn">

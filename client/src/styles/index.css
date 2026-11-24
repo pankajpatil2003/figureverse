@@ -1,8 +1,44 @@
-:root {
+/* ==========================================================================
+   FIGURE VERSE — WHITE & DARK COLLECTOR THEME SYSTEM
+   Default: White / Light Collector Theme (:root & [data-theme="light"])
+   Optional Toggle: Obsidian Dark Theme ([data-theme="dark"])
+   ========================================================================== */
+
+:root,
+[data-theme='light'] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-elevated: #e2e8f0;
+  --bg-header: rgba(255, 255, 255, 0.95);
+  --bg-sidebar: #ffffff;
+  --bg-footer: #0f172a;
+  --bg-media: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent-crimson: #e11d48;
+  --accent-crimson-hover: #be123c;
+  --accent-gold: #d97706;
+  --accent-cyan: #0284c7;
+  --accent-emerald: #059669;
+  --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --card-hover-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+  --font-display: 'Bebas Neue', Impact, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-theme='dark'] {
   --bg-primary: #090b10;
   --bg-secondary: #111520;
   --bg-card: #151a28;
   --bg-elevated: #1b2234;
+  --bg-header: rgba(9, 11, 16, 0.94);
+  --bg-sidebar: #0d1018;
+  --bg-footer: #06080c;
+  --bg-media: #0d111a;
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
   --text-primary: #f8fafc;
@@ -13,8 +49,8 @@
   --accent-gold: #f59e0b;
   --accent-cyan: #06b6d4;
   --accent-emerald: #10b981;
-  --font-display: 'Bebas Neue', Impact, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --card-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  --card-hover-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -29,6 +65,7 @@ body {
   font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a {
@@ -67,13 +104,15 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(9, 11, 16, 0.94);
+  background: var(--bg-header);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
 }
 
 .fv-topbar {
-  background: linear-gradient(90deg, #1a0812 0%, #0f172a 50%, #1a0812 100%);
+  background: linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  color: #f8fafc;
   border-bottom: 1px solid rgba(225, 29, 72, 0.25);
   font-size: 0.77rem;
   padding: 0.45rem 0;
@@ -91,7 +130,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  color: var(--text-secondary);
+  color: #e2e8f0;
   flex-wrap: wrap;
 }
 
@@ -102,16 +141,16 @@ textarea {
 }
 
 .fv-divider {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .fv-highlight-pill {
-  background: rgba(245, 158, 11, 0.16);
+  background: rgba(245, 158, 11, 0.2);
   color: #fbbf24;
   padding: 0.12rem 0.55rem;
   border-radius: 999px;
   font-weight: 700;
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  border: 1px solid rgba(245, 158, 11, 0.4);
 }
 
 .fv-topbar-links {
@@ -125,20 +164,20 @@ textarea {
   align-items: center;
   gap: 0.35rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #e2e8f0;
   transition: color 0.15s;
 }
 
 .fv-toplink:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 .fv-admin-badge {
-  background: rgba(225, 29, 72, 0.2);
-  color: #fda4af;
+  background: rgba(225, 29, 72, 0.28);
+  color: #fecdd3;
   padding: 0.18rem 0.65rem;
   border-radius: 6px;
-  border: 1px solid rgba(225, 29, 72, 0.45);
+  border: 1px solid rgba(225, 29, 72, 0.55);
 }
 
 .fv-mainbar {
@@ -149,7 +188,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .fv-brand {
@@ -170,7 +209,7 @@ textarea {
   font-size: 1.55rem;
   letter-spacing: 1px;
   color: #fff;
-  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.4);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.3);
 }
 
 .fv-brand-title {
@@ -179,20 +218,21 @@ textarea {
   font-size: 1.75rem;
   letter-spacing: 1.5px;
   line-height: 1;
+  color: var(--text-primary);
 }
 
 .fv-brand-sub {
   display: block;
   font-size: 0.64rem;
   letter-spacing: 1.6px;
-  color: var(--accent-gold);
-  font-weight: 700;
+  color: var(--accent-crimson);
+  font-weight: 800;
   margin-top: 2px;
 }
 
 .fv-search-bar {
   flex: 1;
-  max-width: 610px;
+  max-width: 590px;
   display: flex;
   align-items: center;
   background: var(--bg-secondary);
@@ -204,7 +244,8 @@ textarea {
 
 .fv-search-bar:focus-within {
   border-color: var(--accent-crimson);
-  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.2);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+  background: var(--bg-card);
 }
 
 .fv-search-icon {
@@ -216,7 +257,7 @@ textarea {
   flex: 1;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.5rem 0.65rem;
   font-size: 0.9rem;
   outline: none;
@@ -241,7 +282,27 @@ textarea {
 .fv-header-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
+}
+
+.fv-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fv-theme-toggle:hover {
+  border-color: var(--accent-crimson);
+  color: var(--accent-crimson);
 }
 
 .fv-user-menu {
@@ -256,18 +317,19 @@ textarea {
   align-items: center;
   gap: 0.6rem;
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-strong);
   color: var(--text-primary);
   padding: 0.45rem 0.85rem;
   border-radius: 10px;
   cursor: pointer;
   transition: border-color 0.15s, transform 0.15s;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-cart-trigger {
   position: relative;
-  background: linear-gradient(135deg, rgba(225, 29, 72, 0.18), rgba(245, 158, 11, 0.12));
-  border-color: rgba(225, 29, 72, 0.45);
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(245, 158, 11, 0.08));
+  border-color: rgba(225, 29, 72, 0.4);
 }
 
 .fv-action-btn:hover,
@@ -329,18 +391,23 @@ textarea {
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
   white-space: nowrap;
   transition: all 0.15s;
 }
 
 .fv-cat-pill:hover,
 .fv-cat-pill.active {
-  color: #fff;
-  background: rgba(225, 29, 72, 0.18);
+  color: #ffffff;
+  background: var(--cat-accent, var(--accent-crimson));
   border-color: var(--cat-accent, var(--accent-crimson));
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(225, 29, 72, 0.22);
+}
+
+.fv-cat-pill:hover .fv-cat-dot,
+.fv-cat-pill.active .fv-cat-dot {
+  background-color: #ffffff !important;
 }
 
 .fv-cat-dot {
@@ -350,13 +417,13 @@ textarea {
 }
 
 .fv-cat-special {
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.3);
+  color: var(--accent-cyan);
+  border-color: rgba(2, 132, 199, 0.35);
 }
 
 .fv-cat-deal {
-  color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.35);
+  color: var(--accent-gold);
+  border-color: rgba(217, 119, 6, 0.4);
 }
 
 /* --- BUTTONS --- */
@@ -380,7 +447,7 @@ textarea {
 .fv-btn-primary {
   background: linear-gradient(135deg, var(--accent-crimson) 0%, #be123c 100%);
   color: #fff;
-  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.3);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.25);
 }
 
 .fv-btn-primary:hover:not(:disabled) {
@@ -390,23 +457,24 @@ textarea {
 
 .fv-btn-gold {
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: #090b10;
+  color: #ffffff;
 }
 
 .fv-btn-outline {
-  background: transparent;
+  background: var(--bg-card);
   border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .fv-btn-outline:hover {
   border-color: var(--accent-crimson);
-  background: rgba(225, 29, 72, 0.08);
+  color: var(--accent-crimson);
+  background: rgba(225, 29, 72, 0.05);
 }
 
 .fv-btn-glass {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.32);
   color: #fff;
   backdrop-filter: blur(8px);
 }
@@ -426,8 +494,8 @@ textarea {
 }
 
 .fv-icon-btn {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
   color: var(--text-secondary);
   width: 34px;
   height: 34px;
@@ -439,17 +507,17 @@ textarea {
 }
 
 .fv-icon-btn:hover {
-  color: #fff;
+  color: var(--accent-crimson);
   border-color: var(--accent-crimson);
 }
 
 .fv-icon-btn.danger:hover {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
   border-color: #ef4444;
 }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION (High-Impact Cinema Banner in both White & Dark Themes) --- */
 .fv-hero {
   position: relative;
   min-height: 490px;
@@ -457,6 +525,7 @@ textarea {
   align-items: center;
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
+  color: #ffffff;
 }
 
 .fv-hero-bg {
@@ -464,7 +533,7 @@ textarea {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.32) saturate(1.25);
+  filter: brightness(0.36) saturate(1.25);
   transform: scale(1.03);
   transition: background-image 0.6s ease;
 }
@@ -472,7 +541,7 @@ textarea {
 .fv-hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(225, 29, 72, 0.24), transparent 55%),
+  background: radial-gradient(circle at 20% 50%, rgba(225, 29, 72, 0.28), transparent 55%),
     linear-gradient(90deg, #090b10 15%, rgba(9, 11, 16, 0.72) 60%, #090b10 100%);
 }
 
@@ -498,9 +567,9 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(225, 29, 72, 0.22);
-  border: 1px solid rgba(225, 29, 72, 0.5);
-  color: #fda4af;
+  background: rgba(225, 29, 72, 0.28);
+  border: 1px solid rgba(225, 29, 72, 0.6);
+  color: #fecdd3;
   padding: 0.3rem 0.75rem;
   border-radius: 999px;
   font-size: 0.76rem;
@@ -509,8 +578,8 @@ textarea {
 }
 
 .fv-hero-badge {
-  background: rgba(245, 158, 11, 0.2);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.25);
+  color: #fde68a;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   font-size: 0.74rem;
@@ -523,10 +592,11 @@ textarea {
   letter-spacing: 1.5px;
   line-height: 1.02;
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .fv-hero-content p {
-  color: var(--text-secondary);
+  color: #e2e8f0;
   font-size: 1.04rem;
   max-width: 620px;
   margin-bottom: 1.65rem;
@@ -550,7 +620,7 @@ textarea {
   height: 5px;
   border-radius: 99px;
   border: none;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
 }
 
@@ -560,12 +630,12 @@ textarea {
 }
 
 .fv-hero-spotlight-card {
-  background: rgba(21, 26, 40, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
   border-radius: 16px;
   padding: 1rem;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 .fv-spotlight-tag {
@@ -574,7 +644,7 @@ textarea {
   gap: 0.35rem;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #fbbf24;
+  color: var(--accent-crimson);
   margin-bottom: 0.6rem;
 }
 
@@ -587,7 +657,7 @@ textarea {
 }
 
 .fv-spotlight-info small {
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
   font-weight: 700;
   font-size: 0.76rem;
 }
@@ -595,6 +665,7 @@ textarea {
 .fv-spotlight-info h3 {
   font-size: 1.02rem;
   margin: 0.25rem 0 0.75rem;
+  color: var(--text-primary);
 }
 
 .fv-spotlight-price-row {
@@ -605,7 +676,7 @@ textarea {
 
 .fv-spotlight-price-row strong {
   font-size: 1.3rem;
-  color: #fff;
+  color: var(--text-primary);
   margin-right: 0.5rem;
 }
 
@@ -640,7 +711,7 @@ textarea {
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 1.8px;
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
   margin-bottom: 0.25rem;
 }
 
@@ -650,13 +721,14 @@ textarea {
   font-size: 2.25rem;
   letter-spacing: 1px;
   line-height: 1.05;
+  color: var(--text-primary);
 }
 
 .fv-link-arrow {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
   font-weight: 700;
   font-size: 0.9rem;
 }
@@ -672,15 +744,18 @@ textarea {
   height: 205px;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-strong);
   display: flex;
   align-items: flex-end;
-  transition: transform 0.22s, border-color 0.22s;
+  transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+  color: #ffffff;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-cat-card:hover {
   transform: translateY(-4px);
   border-color: var(--cat-color, var(--accent-crimson));
+  box-shadow: var(--card-hover-shadow);
 }
 
 .fv-cat-card img {
@@ -699,7 +774,7 @@ textarea {
 .fv-cat-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(9, 11, 16, 0.15) 0%, rgba(9, 11, 16, 0.94) 85%);
+  background: linear-gradient(180deg, rgba(9, 11, 16, 0.12) 0%, rgba(9, 11, 16, 0.92) 85%);
 }
 
 .fv-cat-card-content {
@@ -724,11 +799,12 @@ textarea {
   font-size: 1.7rem;
   letter-spacing: 1px;
   line-height: 1.05;
+  color: #ffffff;
 }
 
 .fv-cat-card-content p {
   font-size: 0.78rem;
-  color: var(--text-secondary);
+  color: #e2e8f0;
   margin: 0.2rem 0 0.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -742,7 +818,7 @@ textarea {
   gap: 0.35rem;
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--accent-gold);
+  color: #fbbf24;
 }
 
 /* --- TEAMS & TAGS --- */
@@ -757,11 +833,12 @@ textarea {
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 1.1rem;
+  box-shadow: var(--card-shadow);
   transition: border-color 0.2s, transform 0.2s;
 }
 
 .fv-team-tile:hover {
-  border-color: var(--team-color, var(--accent-gold));
+  border-color: var(--team-color, var(--accent-crimson));
   transform: translateY(-2px);
 }
 
@@ -790,6 +867,7 @@ textarea {
 .fv-team-tile h4 {
   font-size: 1.1rem;
   margin-bottom: 0.25rem;
+  color: var(--text-primary);
 }
 
 .fv-team-tile p {
@@ -824,14 +902,14 @@ textarea {
   border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-card);
   border: 1px solid var(--border-strong);
   transition: transform 0.15s;
 }
 
 .fv-tag-pill:hover {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-crimson);
 }
 
 /* --- PRODUCT CARDS --- */
@@ -848,19 +926,20 @@ textarea {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--card-shadow);
   transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
 }
 
 .fv-card:hover {
   transform: translateY(-5px);
   border-color: rgba(225, 29, 72, 0.45);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  box-shadow: var(--card-hover-shadow);
 }
 
 .fv-card-media {
   position: relative;
   height: 255px;
-  background: #0d111a;
+  background: var(--bg-media);
   overflow: hidden;
 }
 
@@ -911,7 +990,7 @@ textarea {
 }
 
 .fv-discount-badge {
-  background: var(--accent-gold);
+  background: #f59e0b;
   color: #090b10;
   font-size: 0.7rem;
   font-weight: 800;
@@ -923,7 +1002,7 @@ textarea {
   position: absolute;
   bottom: 0.7rem;
   right: 0.7rem;
-  background: rgba(9, 11, 16, 0.86);
+  background: rgba(15, 23, 42, 0.88);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.38rem 0.7rem;
@@ -966,7 +1045,7 @@ textarea {
   align-items: center;
   gap: 0.2rem;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-secondary);
   padding: 0.1rem 0.45rem;
   border-radius: 4px;
 }
@@ -981,6 +1060,7 @@ textarea {
   font-weight: 700;
   line-height: 1.35;
   margin-bottom: 0.45rem;
+  color: var(--text-primary);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -988,7 +1068,7 @@ textarea {
 }
 
 .fv-card-title:hover {
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
 }
 
 .fv-card-sub {
@@ -1021,7 +1101,7 @@ textarea {
   padding: 0.12rem 0.48rem;
   border-radius: 5px;
   border: 1px solid var(--border-strong);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
 }
 
 .fv-card-footer {
@@ -1037,7 +1117,7 @@ textarea {
 .fv-price-current {
   font-size: 1.18rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   display: block;
 }
 
@@ -1068,7 +1148,8 @@ textarea {
 
 /* --- PROMO BANNER --- */
 .fv-promo-banner {
-  background: linear-gradient(135deg, #1e1024 0%, #121829 60%, #1f140e 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #311026 100%);
+  color: #ffffff;
   border: 1px solid rgba(225, 29, 72, 0.35);
   border-radius: 16px;
   padding: 2.2rem;
@@ -1077,13 +1158,14 @@ textarea {
   justify-content: space-between;
   gap: 2rem;
   flex-wrap: wrap;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-promo-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--accent-gold);
+  color: #fbbf24;
   font-size: 0.75rem;
   font-weight: 800;
   margin-bottom: 0.4rem;
@@ -1094,10 +1176,11 @@ textarea {
   font-size: 2rem;
   letter-spacing: 1px;
   margin-bottom: 0.35rem;
+  color: #ffffff;
 }
 
 .fv-promo-left p {
-  color: var(--text-secondary);
+  color: #e2e8f0;
   max-width: 680px;
   font-size: 0.92rem;
 }
@@ -1114,7 +1197,7 @@ textarea {
 }
 
 .fv-catalog-banner {
-  background: linear-gradient(135deg, #161b2c 0%, #0f131d 100%);
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 1.75rem 2rem;
@@ -1123,12 +1206,14 @@ textarea {
   justify-content: space-between;
   gap: 1.5rem;
   margin-bottom: 1.75rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-catalog-banner h1 {
   font-family: var(--font-display);
   font-size: 2.5rem;
   letter-spacing: 1px;
+  color: var(--text-primary);
 }
 
 .fv-catalog-banner p {
@@ -1137,8 +1222,8 @@ textarea {
 }
 
 .fv-catalog-count-box {
-  background: rgba(225, 29, 72, 0.14);
-  border: 1px solid rgba(225, 29, 72, 0.35);
+  background: rgba(225, 29, 72, 0.1);
+  border: 1px solid rgba(225, 29, 72, 0.3);
   padding: 0.85rem 1.35rem;
   border-radius: 12px;
   text-align: center;
@@ -1149,6 +1234,7 @@ textarea {
   font-family: var(--font-display);
   font-size: 2.1rem;
   line-height: 1;
+  color: var(--accent-crimson);
 }
 
 .fv-catalog-count-box span {
@@ -1170,6 +1256,7 @@ textarea {
   padding: 1.2rem;
   position: sticky;
   top: 155px;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-filter-head {
@@ -1190,7 +1277,7 @@ textarea {
 .fv-reset-link {
   background: none;
   border: none;
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
   font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
@@ -1232,7 +1319,7 @@ textarea {
 .fv-sidebar-search input {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   width: 100%;
   font-size: 0.84rem;
   outline: none;
@@ -1266,8 +1353,8 @@ textarea {
 
 .fv-filter-item:hover,
 .fv-filter-item.active {
-  background: rgba(225, 29, 72, 0.16);
-  color: #fff;
+  background: rgba(225, 29, 72, 0.12);
+  color: var(--accent-crimson);
   font-weight: 700;
 }
 
@@ -1321,9 +1408,9 @@ textarea {
 }
 
 .fv-active-chip {
-  background: rgba(225, 29, 72, 0.2);
-  border: 1px solid rgba(225, 29, 72, 0.45);
-  color: #fda4af;
+  background: rgba(225, 29, 72, 0.14);
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  color: var(--accent-crimson);
   padding: 0.25rem 0.65rem;
   border-radius: 99px;
   font-size: 0.78rem;
@@ -1342,7 +1429,7 @@ textarea {
 .fv-sort-control select {
   background: var(--bg-card);
   border: 1px solid var(--border-strong);
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.42rem 0.75rem;
   border-radius: 8px;
 }
@@ -1366,7 +1453,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
   font-weight: 700;
 }
 
@@ -1384,6 +1471,7 @@ textarea {
   border-radius: 16px;
   overflow: hidden;
   height: 490px;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-detail-main-img img {
@@ -1445,8 +1533,8 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.14);
+  color: var(--accent-gold);
   border: 1px solid rgba(245, 158, 11, 0.35);
   font-size: 0.74rem;
   font-weight: 700;
@@ -1465,6 +1553,7 @@ textarea {
   letter-spacing: 0.8px;
   line-height: 1.08;
   margin-bottom: 0.75rem;
+  color: var(--text-primary);
 }
 
 .fv-detail-rating-row {
@@ -1487,7 +1576,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: #34d399;
+  color: var(--accent-emerald);
   font-size: 0.84rem;
   font-weight: 700;
 }
@@ -1498,12 +1587,13 @@ textarea {
   border-radius: 12px;
   padding: 1rem 1.25rem;
   margin-bottom: 1.1rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-detail-price {
   font-size: 2rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   margin-right: 0.75rem;
 }
 
@@ -1553,7 +1643,7 @@ textarea {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   border: 1px solid var(--border-strong);
   border-radius: 10px;
   padding: 0.75rem 0.9rem;
@@ -1561,13 +1651,14 @@ textarea {
 }
 
 .fv-grade-card.selected {
-  border-color: var(--accent-gold);
-  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--accent-crimson);
+  background: rgba(225, 29, 72, 0.06);
 }
 
 .fv-grade-card strong {
   display: block;
   font-size: 0.86rem;
+  color: var(--text-primary);
 }
 
 .fv-grade-card small {
@@ -1595,7 +1686,7 @@ textarea {
 .fv-qty-stepper button {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   width: 32px;
   height: 32px;
   font-weight: 800;
@@ -1606,6 +1697,7 @@ textarea {
   padding: 0 0.75rem;
   font-weight: 700;
   font-size: 0.88rem;
+  color: var(--text-primary);
 }
 
 .fv-qty-lg button {
@@ -1618,6 +1710,7 @@ textarea {
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 1.2rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-spec-card h4 {
@@ -1654,7 +1747,7 @@ textarea {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(5, 7, 11, 0.76);
+  background: rgba(15, 23, 42, 0.58);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: flex-end;
@@ -1674,6 +1767,7 @@ textarea {
   border-left: 1px solid var(--border-strong);
   display: flex;
   flex-direction: column;
+  box-shadow: -12px 0 36px rgba(15, 23, 42, 0.18);
 }
 
 .fv-drawer-header {
@@ -1702,7 +1796,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: #34d399;
+  color: var(--accent-emerald);
 }
 
 .fv-drawer-body {
@@ -1718,7 +1812,7 @@ textarea {
 }
 
 .fv-empty-drawer h4 {
-  color: #fff;
+  color: var(--text-primary);
   margin: 0.75rem 0 0.35rem;
 }
 
@@ -1756,7 +1850,7 @@ textarea {
 
 .fv-drawer-item-cat {
   font-size: 0.7rem;
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
   font-weight: 800;
   display: block;
 }
@@ -1766,6 +1860,7 @@ textarea {
   font-weight: 700;
   display: block;
   margin-bottom: 0.45rem;
+  color: var(--text-primary);
 }
 
 .fv-drawer-item-controls {
@@ -1788,7 +1883,7 @@ textarea {
 }
 
 .fv-remove-btn:hover {
-  color: #f87171;
+  color: #dc2626;
 }
 
 .fv-grade-selector {
@@ -1806,7 +1901,7 @@ textarea {
   font-size: 0.8rem;
   font-weight: 800;
   margin-bottom: 0.6rem;
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
 }
 
 .fv-drawer-footer {
@@ -1832,9 +1927,9 @@ textarea {
 .fv-summary-total {
   font-size: 1.08rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   padding-top: 0.5rem;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-strong);
 }
 
 .fv-drawer-actions {
@@ -1852,15 +1947,16 @@ textarea {
   max-width: 840px;
   width: 100%;
   overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
 }
 
 .fv-modal-close {
   position: absolute;
   top: 0.9rem;
   right: 0.9rem;
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   border: 1px solid var(--border-strong);
-  color: #fff;
+  color: var(--text-primary);
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -1896,6 +1992,7 @@ textarea {
 .fv-quickview-content h3 {
   font-size: 1.35rem;
   margin-bottom: 0.45rem;
+  color: var(--text-primary);
 }
 
 .fv-quickview-rating {
@@ -1917,6 +2014,7 @@ textarea {
 .fv-price-lg {
   font-size: 1.6rem;
   font-weight: 800;
+  color: var(--text-primary);
 }
 
 .fv-price-old-lg {
@@ -1988,6 +2086,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 1.15rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-cart-row img {
@@ -2006,6 +2105,7 @@ textarea {
   font-weight: 700;
   display: block;
   margin: 0.2rem 0;
+  color: var(--text-primary);
 }
 
 .fv-cart-unit-price {
@@ -2020,6 +2120,7 @@ textarea {
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 1.5rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-cart-summary-card h3,
@@ -2034,10 +2135,11 @@ textarea {
   gap: 0.5rem;
   background: rgba(16, 185, 129, 0.12);
   border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #6ee7b7;
+  color: var(--accent-emerald);
   padding: 0.65rem 0.85rem;
   border-radius: 9px;
   font-size: 0.8rem;
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
@@ -2070,7 +2172,7 @@ textarea {
 }
 
 .fv-mode-banner-text a {
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
   font-weight: 700;
   text-decoration: underline;
 }
@@ -2104,7 +2206,7 @@ textarea {
   border: 1px solid var(--border-strong);
   border-radius: 8px;
   padding: 0.65rem 0.85rem;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.9rem;
   outline: none;
 }
@@ -2113,6 +2215,7 @@ textarea {
 .fv-field select:focus,
 .fv-field textarea:focus {
   border-color: var(--accent-crimson);
+  background: var(--bg-card);
 }
 
 .fv-checkout-items {
@@ -2155,7 +2258,7 @@ textarea {
 }
 
 .fv-payment-gateway-box {
-  background: rgba(37, 99, 235, 0.12);
+  background: rgba(37, 99, 235, 0.08);
   border: 1px solid rgba(59, 130, 246, 0.35);
   border-radius: 10px;
   padding: 0.85rem;
@@ -2167,23 +2270,25 @@ textarea {
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  color: #60a5fa;
+  color: #2563eb;
   margin-bottom: 0.25rem;
 }
 
 /* --- RAZORPAY INTERACTIVE CHECKOUT MODAL --- */
 .fv-rzp-modal {
-  background: #131929;
+  background: var(--bg-card);
+  color: var(--text-primary);
   border: 1px solid rgba(59, 130, 246, 0.5);
   border-radius: 16px;
   width: 100%;
   max-width: 460px;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.4);
 }
 
 .fv-rzp-header {
   background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+  color: #ffffff;
   padding: 1.15rem;
   display: flex;
   align-items: center;
@@ -2202,6 +2307,7 @@ textarea {
   height: 38px;
   border-radius: 8px;
   background: var(--accent-crimson);
+  color: #fff;
   display: grid;
   place-items: center;
   font-family: var(--font-display);
@@ -2210,6 +2316,7 @@ textarea {
 
 .fv-rzp-brand h4 {
   font-size: 0.92rem;
+  color: #ffffff;
 }
 
 .fv-rzp-brand small {
@@ -2219,6 +2326,7 @@ textarea {
 
 .fv-rzp-amount {
   text-align: right;
+  color: #ffffff;
 }
 
 .fv-rzp-amount span {
@@ -2244,7 +2352,7 @@ textarea {
 }
 
 .fv-rzp-customer-bar {
-  background: #0d121f;
+  background: var(--bg-secondary);
   padding: 0.55rem 1.15rem;
   display: flex;
   justify-content: space-between;
@@ -2280,9 +2388,9 @@ textarea {
 }
 
 .fv-rzp-tabs button.active {
-  background: rgba(37, 99, 235, 0.25);
-  border-color: #3b82f6;
-  color: #fff;
+  background: rgba(37, 99, 235, 0.15);
+  border-color: #2563eb;
+  color: #2563eb;
 }
 
 .fv-rzp-method-box {
@@ -2300,9 +2408,9 @@ textarea {
 
 .fv-rzp-method-box input,
 .fv-rzp-method-box select {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-strong);
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.65rem;
   border-radius: 8px;
 }
@@ -2321,7 +2429,8 @@ textarea {
 
 .fv-upi-badges span {
   font-size: 0.7rem;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
   padding: 0.18rem 0.5rem;
   border-radius: 5px;
 }
@@ -2332,7 +2441,8 @@ textarea {
   justify-content: center;
   gap: 0.4rem;
   font-size: 0.74rem;
-  color: #34d399;
+  color: var(--accent-emerald);
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
@@ -2361,6 +2471,7 @@ textarea {
   padding: 2rem;
   max-width: 860px;
   margin: 0 auto;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-success-icon {
@@ -2387,7 +2498,7 @@ textarea {
 
 .fv-order-number-pill strong {
   font-size: 1.4rem;
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
 }
 
 .fv-receipt-grid {
@@ -2468,6 +2579,7 @@ textarea {
   border-radius: 14px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-track-form {
@@ -2523,7 +2635,7 @@ textarea {
 
 .fv-step.done {
   border-color: #10b981;
-  color: #34d399;
+  color: var(--accent-emerald);
   background: rgba(16, 185, 129, 0.1);
 }
 
@@ -2531,7 +2643,7 @@ textarea {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-elevated);
   display: grid;
   place-items: center;
 }
@@ -2550,6 +2662,7 @@ textarea {
   padding: 2.25rem;
   max-width: 510px;
   width: 100%;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-auth-card h1 {
@@ -2598,7 +2711,7 @@ textarea {
 }
 
 .fv-auth-footer a {
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
   font-weight: 700;
 }
 
@@ -2610,8 +2723,8 @@ textarea {
 }
 
 .fv-admin-sidebar {
-  background: #0d1018;
-  border-right: 1px solid var(--border-subtle);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-strong);
   padding: 1.35rem 1rem;
   display: flex;
   flex-direction: column;
@@ -2634,11 +2747,12 @@ textarea {
   font-family: var(--font-display);
   font-size: 1.45rem;
   letter-spacing: 1px;
+  color: var(--text-primary);
 }
 
 .fv-admin-brand small {
   font-size: 0.68rem;
-  color: var(--accent-gold);
+  color: var(--accent-crimson);
   font-weight: 800;
 }
 
@@ -2658,14 +2772,15 @@ textarea {
   color: var(--text-secondary);
   font-weight: 700;
   font-size: 0.88rem;
+  border: 1px solid transparent;
   transition: all 0.15s;
 }
 
 .fv-admin-nav a:hover,
 .fv-admin-nav a.active {
-  background: linear-gradient(135deg, rgba(225, 29, 72, 0.22), rgba(245, 158, 11, 0.1));
-  color: #fff;
-  border: 1px solid rgba(225, 29, 72, 0.45);
+  background: rgba(225, 29, 72, 0.12);
+  color: var(--accent-crimson);
+  border-color: rgba(225, 29, 72, 0.35);
 }
 
 .fv-admin-sidebar-footer {
@@ -2685,15 +2800,15 @@ textarea {
   border-radius: 8px;
   font-size: 0.83rem;
   font-weight: 700;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
   color: var(--text-secondary);
   cursor: pointer;
 }
 
 .fv-admin-store-link:hover,
 .fv-admin-logout-btn:hover {
-  color: #fff;
+  color: var(--accent-crimson);
   border-color: var(--accent-crimson);
 }
 
@@ -2716,6 +2831,7 @@ textarea {
   font-family: var(--font-display);
   font-size: 2.35rem;
   letter-spacing: 1px;
+  color: var(--text-primary);
 }
 
 .fv-admin-header p {
@@ -2743,6 +2859,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 1rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-kpi-icon {
@@ -2754,23 +2871,23 @@ textarea {
 }
 
 .kpi-green {
-  background: rgba(16, 185, 129, 0.16);
-  color: #34d399;
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
 }
 
 .kpi-blue {
-  background: rgba(59, 130, 246, 0.16);
-  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.14);
+  color: #2563eb;
 }
 
 .kpi-purple {
-  background: rgba(168, 85, 247, 0.16);
-  color: #c084fc;
+  background: rgba(168, 85, 247, 0.14);
+  color: #9333ea;
 }
 
 .kpi-amber {
-  background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.14);
+  color: #d97706;
 }
 
 .fv-kpi-card small {
@@ -2782,6 +2899,7 @@ textarea {
 .fv-kpi-card strong {
   display: block;
   font-size: 1.45rem;
+  color: var(--text-primary);
 }
 
 .fv-kpi-card span {
@@ -2797,13 +2915,14 @@ textarea {
 }
 
 .fv-admin-quick-card {
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   border: 1px solid var(--border-strong);
   border-radius: 12px;
   padding: 1.1rem;
   display: flex;
   align-items: center;
   gap: 0.9rem;
+  box-shadow: var(--card-shadow);
   transition: border-color 0.18s, transform 0.18s;
 }
 
@@ -2815,6 +2934,7 @@ textarea {
 .fv-admin-quick-card h4 {
   font-size: 0.94rem;
   margin-bottom: 0.2rem;
+  color: var(--text-primary);
 }
 
 .fv-admin-quick-card p {
@@ -2834,11 +2954,13 @@ textarea {
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 1.35rem;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-admin-panel h3 {
   margin-bottom: 1rem;
   font-size: 1.05rem;
+  color: var(--text-primary);
 }
 
 .fv-admin-panel-head {
@@ -2868,7 +2990,7 @@ textarea {
 .fv-admin-search input {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   width: 100%;
   outline: none;
 }
@@ -2877,7 +2999,7 @@ textarea {
 .fv-admin-header select {
   background: var(--bg-card);
   border: 1px solid var(--border-strong);
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.55rem 0.9rem;
   border-radius: 10px;
 }
@@ -2923,6 +3045,7 @@ textarea {
 .fv-admin-fig-cell strong {
   display: block;
   max-width: 260px;
+  color: var(--text-primary);
 }
 
 .fv-admin-fig-cell small {
@@ -2954,7 +3077,7 @@ textarea {
 .fv-inline-input input {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   width: 100%;
   font-weight: 700;
   outline: none;
@@ -2966,7 +3089,7 @@ textarea {
   border: 1px solid var(--border-strong);
   border-radius: 7px;
   padding: 0.35rem 0.5rem;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -2974,7 +3097,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: #34d399;
+  color: var(--accent-emerald);
   font-weight: 700;
   font-size: 0.78rem;
 }
@@ -3044,6 +3167,7 @@ textarea {
 
 .fv-taxonomy-item-left strong {
   display: block;
+  color: var(--text-primary);
 }
 
 .fv-taxonomy-item-left small {
@@ -3091,6 +3215,7 @@ textarea {
   max-height: 90vh;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
 }
 
 .fv-admin-modal-head {
@@ -3128,12 +3253,12 @@ textarea {
 
 .fv-type-badge.guest {
   background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
+  color: #d97706;
 }
 
 .fv-type-badge.member {
-  background: rgba(56, 189, 248, 0.16);
-  color: #38bdf8;
+  background: rgba(2, 132, 199, 0.15);
+  color: #0284c7;
 }
 
 .status-paid,
@@ -3141,31 +3266,31 @@ textarea {
 .status-delivered,
 .fv-badge-paid,
 .fv-badge-confirmed {
-  background: rgba(16, 185, 129, 0.18);
-  color: #34d399;
+  background: rgba(16, 185, 129, 0.16);
+  color: #059669;
 }
 
 .status-pending,
 .status-processing {
-  background: rgba(245, 158, 11, 0.18);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.16);
+  color: #d97706;
 }
 
 .status-shipped {
-  background: rgba(59, 130, 246, 0.2);
-  color: #60a5fa;
+  background: rgba(37, 99, 235, 0.16);
+  color: #2563eb;
 }
 
 .status-failed,
 .status-cancelled {
-  background: rgba(239, 68, 68, 0.2);
-  color: #f87171;
+  background: rgba(239, 68, 68, 0.16);
+  color: #dc2626;
 }
 
 .fv-status-select {
   background: var(--bg-secondary);
   border: 1px solid var(--border-strong);
-  color: #fff;
+  color: var(--text-primary);
   padding: 0.3rem 0.55rem;
   border-radius: 6px;
   font-size: 0.75rem;
@@ -3221,20 +3346,22 @@ textarea {
 }
 
 .fv-lowstock-count {
-  color: #fbbf24;
+  color: #d97706;
   font-weight: 800;
   font-size: 0.76rem;
 }
 
 /* --- FOOTER --- */
 .fv-footer {
-  background: #06080c;
+  background: var(--bg-footer);
+  color: #f8fafc;
   border-top: 1px solid var(--border-subtle);
   margin-top: 3rem;
 }
 
 .fv-trust-strip {
   background: var(--bg-secondary);
+  color: var(--text-primary);
   border-bottom: 1px solid var(--border-subtle);
   padding: 2rem 0;
 }
@@ -3252,13 +3379,14 @@ textarea {
 }
 
 .fv-trust-icon {
-  color: var(--accent-crimson-hover);
+  color: var(--accent-crimson);
   flex-shrink: 0;
 }
 
 .fv-trust-item h4 {
   font-size: 0.94rem;
   margin-bottom: 0.2rem;
+  color: var(--text-primary);
 }
 
 .fv-trust-item p {
@@ -3273,8 +3401,12 @@ textarea {
   padding: 3rem 1.25rem;
 }
 
+.fv-footer-brand .fv-brand-title {
+  color: #ffffff;
+}
+
 .fv-footer-desc {
-  color: var(--text-muted);
+  color: #94a3b8;
   font-size: 0.88rem;
   margin-top: 0.9rem;
   max-width: 420px;
@@ -3284,7 +3416,7 @@ textarea {
   font-size: 0.86rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--accent-gold);
+  color: #fbbf24;
   margin-bottom: 0.85rem;
 }
 
@@ -3294,18 +3426,18 @@ textarea {
   flex-direction: column;
   gap: 0.45rem;
   font-size: 0.86rem;
-  color: var(--text-secondary);
+  color: #cbd5e1;
 }
 
 .fv-footer-col a:hover {
-  color: #fff;
+  color: #ffffff;
 }
 
 .fv-footer-bottom {
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.1rem 0;
   font-size: 0.78rem;
-  color: var(--text-muted);
+  color: #94a3b8;
 }
 
 .fv-footer-bottom-inner {
@@ -3324,6 +3456,7 @@ textarea {
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
   margin: 1.5rem 0;
+  box-shadow: var(--card-shadow);
 }
 
 .fv-empty-state h2,
@@ -3337,9 +3470,9 @@ textarea {
 }
 
 .fv-alert-error {
-  background: rgba(239, 68, 68, 0.16);
-  border: 1px solid rgba(239, 68, 68, 0.45);
-  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #dc2626;
   padding: 0.85rem 1.1rem;
   border-radius: 10px;
   margin-bottom: 1.25rem;

@@ -7,12 +7,16 @@ import {
   ShoppingCart,
   Store,
   LogOut,
-  ShieldAlert
+  ShieldAlert,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export default function AdminLayout() {
   const { user, loading, isAdmin, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   if (loading) {
@@ -74,6 +78,14 @@ export default function AdminLayout() {
         </nav>
 
         <div className="fv-admin-sidebar-footer">
+          <button
+            type="button"
+            className="fv-admin-store-link"
+            onClick={toggleTheme}
+          >
+            {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+            <span>Switch to {theme === 'light' ? 'Dark' : 'White'} Theme</span>
+          </button>
           <Link to="/" className="fv-admin-store-link">
             <Store size={16} /> View Live Storefront
           </Link>
